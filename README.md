@@ -1,27 +1,96 @@
-# ShakeToSOS - Flutter scaffold (DELIVERABLE ZIP)
+ShakeToSOS is a Flutter-based emergency alert app that allows users to send an SOS message with their location by shaking their phone. The app runs a **background service** to detect shakes, even when the app is closed or the phone is rebooted.
 
-This archive contains a Flutter project scaffold + Android native files to implement:
+---
 
-- Background foreground Service that monitors accelerometer for shakes (3 shakes within 5s).
-- BootReceiver to auto-start the service after device reboot.
-- MethodChannel bridge to toggle the service from Flutter.
-- Prefilled SMS & WhatsApp intents when SOS triggers (will open respective apps).
+## Features
 
-IMPORTANT:
-- This is a **scaffold** intended to be imported into Android Studio / opened with your Flutter environment.
-- You must run `flutter pub get`, grant runtime permissions (LOCATION, SEND_SMS, etc.), and build the APK from your machine.
-- The Android native code assumes V2 embedding (MainActivity extends FlutterActivity).
-- Gradle plugin versions are set to 8.3.0 and Kotlin 1.9.10; Android compileSdk/targetSdk = 34; minSdk = 24.
+- **Shake Detection**
+  - Detects 3 shakes within 5 seconds to trigger SOS.
+  
+- **Emergency Alerts**
+  - Sends pre-filled SMS messages to saved emergency contacts.
+  - Opens WhatsApp with a pre-filled SOS message.
+  - Includes Google Maps link with live location.
 
-How to import:
-1. Unzip `ShakeToSOS.zip`.
-2. Open the folder in Android Studio (it will prompt to update Gradle & download necessary SDKs).
-3. From Flutter: run `flutter pub get` (or use the IDE's prompt).
-4. Build & Run. You may need to grant runtime permissions on first run.
+- **Persistent Background Service**
+  - Foreground service runs continuously with a notification: *“Shake-to-SOS is active.”*
+  - Auto-starts on device boot using `RECEIVE_BOOT_COMPLETED` permission.
 
-Notes & Limitations:
-- The service uses a **simple** accelerometer threshold; you might want to refine the algorithm.
-- Opening SMS/WhatsApp from a background service starts the respective activity; on some OEMs this may be restricted.
-- For production, implement runtime permission requests in Flutter and handle OS-specific battery optimizations (auto-start policies vary by vendor).
-- If you want a ready-signed APK, build a debug APK locally or request that I include one (I can provide a debug APK in this package on request).
+- **Emergency Contacts Management**
+  - Add, remove, and manage contacts.
+  - Stored locally using `SharedPreferences`.
+
+- **Test SOS**
+  - Test button to simulate shake detection and SOS delivery.
+
+- **Flutter & Android Setup**
+  - Flutter 3.35+ / Dart 3 compatible
+  - Android V2 embedding
+  - compileSdk 34, minSdk 24, targetSdk 34
+  - Gradle 8.3, Kotlin 1.9.10
+
+---
+
+## Screenshots
+
+*(Add your app screenshots here)*
+
+---
+
+## Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/shaketosos.git
+cd shaketosos
+2. Install dependencies
+bash
+Copy code
+flutter pub get
+3. Run the app
+bash
+Copy code
+flutter run
+After reboot, the background service will start automatically.
+
+Usage
+Open the app and go to Emergency Contacts to add phone numbers.
+
+Shake the phone 3 times quickly to trigger the SOS alert.
+
+The app will open SMS/WhatsApp apps with a pre-filled SOS message including your location.
+
+You can also use the Test SOS button to verify functionality.
+
+Dependencies
+Flutter
+
+cupertino_icons
+
+url_launcher
+
+shared_preferences
+
+Characters, Material Color Utilities, Meta (Dart packages)
+
+Permissions
+SEND_SMS — send SMS messages to contacts
+
+ACCESS_FINE_LOCATION — get live location for SOS
+
+RECEIVE_BOOT_COMPLETED — restart background service after reboot
+
+FOREGROUND_SERVICE — run continuous shake detection service
+
+Contributing
+Fork the repository
+
+Create a feature branch (git checkout -b feature/your-feature)
+
+Commit your changes (git commit -am 'Add new feature')
+
+Push to the branch (git push origin feature/your-feature)
+
+Open a Pull Request
 
